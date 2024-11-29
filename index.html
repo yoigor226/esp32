@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <title>TSUYANO HOUSE</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        button {
+            width: 150px;
+            height: 50px;
+            margin: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>ESP32 Control Panel</h1>
+    <button onclick="sendCommand('1')" id="button1" style="background-color:green">LAMPE</button><br><br>
+    <button onclick="sendCommand('2')" id="button2" style="background-color:green">VENTILO</button><br><br>
+    <button onclick="sendCommand('3')" id="button3" style="background-color:green">TV</button><br><br>
+    <script>
+        function sendCommand(id) {
+            fetch('http://http://192.168.137.39:8080/command?id=' + id).then(response => response.text()).then(data => {
+                if (data =='1') {
+                    document.getElementById('button' + id).style.backgroundColor = 'green';
+                } else {
+                    document.getElementById('button' + id).style.backgroundColor = 'red';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
